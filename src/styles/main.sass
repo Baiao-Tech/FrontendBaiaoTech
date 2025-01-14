@@ -1,0 +1,404 @@
+@import "_variables.sass"
+
+main
+    width: 100%
+    background: $black
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    .main-content
+        width: 100%
+        max-width: 1200px
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        padding: 0 16px
+
+        .categories,
+        .lastEvents 
+            width: 100%
+            padding: 14px 0
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+
+            .category-content,
+            .lastEventsContent 
+                width: 100%
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                gap: 20px
+
+                .category-title-btn,
+                .lastEventsTitle-btn
+                    width: 100%
+                    display: flex
+                    flex-direction: row
+                    justify-content: space-between
+                    align-items: center
+
+                    .category-title,
+                    .lastEventsTitle 
+                        width: 100%
+                        display: flex
+                        justify-content: flex-start
+                        align-items: center
+
+                        h2 
+                            color: $white
+                            font-weight: 700
+                            line-height: 1.5
+                            margin-right: 10px
+
+                    .category-btn,
+                    .lastEventsBtn 
+                        width: 200px
+                        height: 40px
+                        display: flex
+                        flex-direction: row
+                        justify-content: flex-end
+                        align-items: center
+                        gap: 10px
+
+                        button
+                            width: 30px
+                            height: 30px
+                            border-radius: 50%
+                            border: 1px solid $white
+                            cursor: pointer
+                            background: none
+                            padding: 5px
+                            display: flex
+                            justify-content: center
+                            align-items: center
+
+                            &:disabled 
+                                cursor: not-allowed
+                                opacity: 0.5 
+
+                            img 
+                                width: 100%
+                                height: 100%
+                    
+                .card-categories,
+                .card-lastEvents
+                    width: 100%
+                    display: flex
+                    flex-direction: row
+                    justify-content: center
+                    align-items: center
+                    gap: 16px
+                    padding: 0
+
+                    .card 
+                        width: 100%
+                        height: 187px
+                        background: $graphite
+                        border-radius: 8px
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+                        display: flex
+                        flex-direction: column
+                        justify-content: space-between
+                        align-items: center
+                        padding: 10px
+                        cursor: pointer
+
+                        &:hover
+                            transform: scale(1.05)
+                            transition: all 0.3s ease-in-out
+
+                        .card-image
+                            width: 100%
+                            height: 70%
+                            background: $orange
+                            border-radius: 8px
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+                            display: flex
+                            justify-content: center
+                            align-items: center
+
+                            // img 
+                            //     width: 100%
+                            //     height: 100%
+                            //     border-radius: 8px
+
+                        .card-title 
+                            width: 100%
+                            height: 30%
+                            text-align: center
+
+                            h3 
+                                width: 100%
+                                height: 100%
+                                color: $white
+                                font-size: 14px
+                                font-weight: 700
+                                line-height: 1.5
+                                display: flex
+                                justify-content: center
+                                align-items: center
+                    
+                    .card 
+                        width: 100%
+                        height: 250px
+                        display: flex
+                        flex-direction: column
+                        justify-content: flex-start
+                        align-items: center
+                        padding: 10px
+                        gap: 5px
+                        background: $graphite
+                        border-radius: 8px
+
+                        .card-image 
+                            width: 100%
+                            height: 60%
+                            background: $orange
+                            border-radius: 8px
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+
+                            // img 
+                            //     width: 100%
+                            //     height: 100%
+                            //     border-radius: 8px
+                            
+                        .card-body
+                            width: 100%
+                            height: 40%
+                            display: grid
+                            grid-template-rows: repeat(auto-fit, minmax(auto, 1fr))
+
+                            .card-data
+                                width: 100%
+                                height: 100%
+
+                                h3
+                                    font-size: 12px
+                                    color: $orange
+                                    text-align: left
+
+                            .card-title
+                                width: 100%
+                                height: 100%
+                                text-align: left
+
+                                h3 
+                                    width: 100%
+                                    height: 100%
+                                    font-size: 14px
+                                    color: $white
+                                    line-height: 1.5
+                                    display: flex
+                                    justify-content: flex-start
+                                    align-items: center
+
+                            .card-location
+                                width: 100%
+                                height: 100%
+                                display: flex
+                                flex-direction: row
+                                justify-content: flex-start
+                                align-items: center
+
+                                h3 
+                                    font-size: 12px
+                                    color: $white
+                                    line-height: 1.5
+
+        .eventAwaited
+            width: 100%
+            padding: 14px 0
+            margin: 50px 0
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+
+            .eventAwaitedContent
+                width: 100%
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                gap: 20px
+
+                .eventAwaitedTitle
+                    width: 100%
+                    display: flex
+                    flex-direction: row
+                    justify-content: flex-start
+                    align-items: center
+
+                    h2
+                        color: $white
+                        font-weight: 700
+                        line-height: 1.5
+                
+                .card-eventAwaited
+                    width: 100%
+                    height: 350px
+                    background: $graphite
+                    border-radius: 8px
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+                    display: grid
+                    grid-template-columns: 60% 40%
+                    grid-template-rows: 100%
+
+                    @media screen and ( max-width: 463px )
+                        height: 400px
+                        grid-template-columns: 100%
+                        grid-template-rows: 40% 60%
+
+
+                    .card-image
+                        width: 100%
+                        height: 100%
+                        background: $orange
+                        border-radius: 8px
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+                        display: flex
+                        justify-content: center
+                        align-items: center
+
+                        // img 
+                        //     width: 100%
+                        //     height: 100%
+                        //     border-radius: 8px
+                    
+                    .card-info
+                        width: 100%
+                        height: 100%
+                        padding: 25px 15px
+                        display: flex
+                        flex-direction: column
+                        justify-content: space-between
+                        align-items: flex-start
+
+                        .info
+                            width: 100%
+                            display: grid
+                            grid-template-rows: repeat(auto-fit, minmax(auto, 1fr)) 
+                            gap: 15px
+
+                            .card-data
+                                width: 100%
+                                height: 100%
+
+                                h3
+                                    font-size: 12px
+                                    color: $orange
+                                    text-align: left
+
+                                @media screen and ( max-width: 463px )
+                                    h3
+                                        font-size: 10px
+                                    
+                            .card-title
+                                width: 100%
+                                height: 100%
+                                display: flex
+                                flex-direction: row
+                                justify-content: flex-start
+                                align-items: center
+
+                                h3 
+                                    font-size: 16px
+                                    color: $white
+                                    line-height: 1.5
+                                
+                                @media screen and ( max-width: 463px )
+                                    h3
+                                        font-size: 12px
+
+                            .card-description
+                                width: 100%
+                                height: 100%
+                                display: flex
+                                flex-direction: row
+                                justify-content: flex-start
+                                align-items: center
+
+                                p
+                                    font-size: 14px
+                                    font-weight: 400
+                                    color: $white
+                                    line-height: 1.5
+
+                                @media screen and ( max-width: 463px )
+                                    p
+                                        font-size: 12px
+                                    
+
+                            .card-location
+                                width: 100%
+                                height: 100%
+                                display: flex
+                                flex-direction: row
+                                justify-content: flex-start
+                                align-items: center
+
+                                h3 
+                                    font-size: 12px
+                                    color: $white
+                                    line-height: 1.5
+                                
+                                @media screen and ( max-width: 463px )
+                                    h3
+                                        font-size: 10px
+                        
+                        .card-btn
+                            width: 100%
+                            height: 40px
+                            display: flex
+                            flex-direction: row
+                            justify-content: flex-start
+                            align-items: center
+                            gap: 10px
+
+                            button
+                                width: 200px
+                                height: 40px
+                                border-radius: 8px
+                                border: 1px solid $gray
+                                cursor: pointer
+                                background: $black
+                                color: $white
+                                padding: 5px
+                                display: flex
+                                justify-content: center
+                                align-items: center
+
+                                &:hover
+                                    background: $orange
+                                    transition: all 0.3s ease-in-out
+
+                            
+                        
+
+@media screen and (max-width: 768px) 
+    .main-content 
+        padding: 0 8px
+
+        .categories .category-content,
+        .lastEvents .lastEventsContent 
+            gap: 16px
+
+            .card-categories,
+            .card-lastEvents 
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) 
+
+                .card
+                    flex: 0 0 calc(100% / 3 - 8px)
+
+@media screen and (max-width: 480px) 
+    .categories .category-content,
+    .lastEvents .lastEventsContent 
+        .card-categories,
+        .card-lastEvents 
+            grid-template-columns: 1fr 

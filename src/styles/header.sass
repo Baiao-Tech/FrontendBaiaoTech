@@ -1,0 +1,139 @@
+@import "_variables.sass"
+
+header 
+    width: 100%
+    height: 80px
+    background: $graphite
+    display: flex
+    justify-content: center
+    align-items: center
+
+    .header-content
+        width: 100%
+        height: 100%
+        padding: 0 20px
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        align-items: center
+
+        .logo
+            height: 100%
+            display: flex
+            justify-content: center
+            align-items: center
+
+            a
+                font-size: 24px
+                font-weight: 700
+                line-height: 1.5
+                color: $white
+                text-transform: uppercase
+                letter-spacing: 1px
+
+            span
+                color: $orange
+        
+        @media screen and ( max-width: 768 )
+            .logo
+                h1
+                    font-size:18px
+
+        .actions
+            height: 100%
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            align-items: center
+            gap: 30px
+
+            .location
+                height: 100%
+                display: flex   
+                justify-content: center
+                align-items: center
+
+                button
+                    background: none
+                    border: none
+                    color: $white
+                    font-size: 14px
+                    font-weight: bold
+                    text-transform: uppercase
+                    letter-spacing: 1px
+                    cursor: pointer
+                    display: flex   
+                    justify-content: center
+                    align-items: center
+
+                    span
+                        margin: 0 5px
+
+            @media screen and ( max-width: 768 )
+                .location
+                    button
+                        font-size: 12px
+                
+            
+            .indicatEvent 
+                height: 100%
+                display: flex
+                justify-content: center
+                align-items: center
+
+                a
+                    color: $orange
+                    font-size: 14px
+                    font-weight: bold
+                    text-transform: uppercase
+                    letter-spacing: 1px
+                    cursor: pointer
+        
+            @media screen and ( max-width: 768 )
+                .indicatEvent
+                    a
+                        font-size: 12px
+
+        @media screen and ( max-width: 768 )
+            .actions
+                width: auto
+                height: 120px
+                padding: 20px
+                display: none
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                position: absolute
+                right: 0
+                top: 80px
+                background: $graphite
+                z-index: 1000
+                transition: all 0.3s
+            
+
+        .menu-mobile
+            display: none
+
+            @media screen and ( max-width: 768 )
+                display: flex
+                justify-content: center
+                align-items: center
+                cursor: pointer
+
+                button
+                    width: 30px
+                    height: 30px
+                    background: none
+                    border: none
+
+                    &#menuClose
+                        display: none
+
+                    img
+                        width: 100%
+                        height: 100%
+                        transition: all 0.3s
+
+                        &.open
+                            transform: rotate(90deg)
+                            transition: all 0.3s 
