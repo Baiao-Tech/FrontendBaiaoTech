@@ -1,62 +1,67 @@
 "use client";
 import "@/styles/main.sass";
 import { useEffect, useState } from "react";
-import { categories } from "@/components/categories";
 import Image from "next/image";
 import arrowLeftIcon from "@/assets/arrow-left.svg";
 import arrowRightIcon from "@/assets/arrow-right.svg";
-import { nextEvents } from "@/components/nextEvents";
 import Link from "next/link";
+import { api } from "@/services/api";
+import LoadingMain from "@/components/loadingMain";
+import CategoriesCards from "@/components/categoriesCards";
+
+interface Event {
+  id: number;
+  genero: string;
+  data: string;
+  local: string;
+  imagem: string;
+}
 
 export default function Main() {
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [events, setEvents] = useState<Event[]>([]);
   const [eventsPerPage, setEventsPerPage] = useState(4);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const updateItemsPerPage = () => {
     if (window.innerWidth <= 768) {
-      setItemsPerPage(3);
       setEventsPerPage(3);
     } else {
-      setItemsPerPage(6);
       setEventsPerPage(4);
     }
   };
 
+  const getAllEvents = async () => {
+    try {
+      const response = await api.get<Event[]>("/eventos");
+      setEvents(response.data);
+      setLoading(false);
+      console.log(response.data);
+    } catch (err) {
+      setError("Erro ao carregar os eventos." + err);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    updateItemsPerPage(); // Configura no início
-    window.addEventListener("resize", updateItemsPerPage); // Recalcula ao redimensionar
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+
+    getAllEvents();
 
     return () => {
-      window.removeEventListener("resize", updateItemsPerPage); // Remove o listener ao desmontar
+      window.removeEventListener("resize", updateItemsPerPage);
     };
   }, []);
 
-  const visibleCategories = categories.slice(
-    currentIndex,
-    currentIndex + itemsPerPage
-  );
-
-  const visibleEvents = nextEvents.slice(
+  const visibleEvents = events.slice(
     currentEventIndex,
     currentEventIndex + eventsPerPage
   );
 
-  const handleNextCategories = () => {
-    if (currentIndex + itemsPerPage < categories.length) {
-      setCurrentIndex(currentIndex + itemsPerPage);
-    }
-  };
-  
-  const handlePrevCategories = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - itemsPerPage);
-    }
-  };
-
   const handleNextEvents = () => {
-    if (currentEventIndex + eventsPerPage < nextEvents.length) {
+    if (currentEventIndex + eventsPerPage < events.length) {
       setCurrentEventIndex(currentEventIndex + eventsPerPage);
     }
   };
@@ -67,44 +72,50 @@ export default function Main() {
     }
   };
 
-  return (
-    <main>
-      <div className="main-content">
-        <div className="categories">
-            <div className="category-content">
-              <div className="category-title-btn">
-                <div className="category-title">
-                  <h2>Categorias</h2>
-                </div>
-                <div className="category-btn">
-                  <button
-                    id="prevBtn"
-                    onClick={handlePrevCategories}
-                    disabled={currentIndex === 0}
-                  >
-                    <Image src={arrowLeftIcon} alt="Anterior" />
-                  </button>
-                  <button
-                    id="nextBtn"
-                    onClick={handleNextCategories}
-                    disabled={currentIndex + itemsPerPage >= categories.length}
-                  >
-                    <Image src={arrowRightIcon} alt="Próximo" />
-                  </button>
-                </div>
+  if (loading) {
+    return <LoadingMain />;
+  }
+
+  if (events.length === 0) {
+    return (
+      <main>
+        <div className="main-content">
+          <CategoriesCards />
+
+          <div className="lastEvents">
+          <div className="lastEventsContent">
+            <div className="lastEventsTitle-btn">
+              <div className="lastEventsTitle">
+                <h2>Próximos Eventos</h2>
               </div>
-              <div className="card-categories">
-                {visibleCategories.map((category) => (
-                  <Link href={`/categoria/${category.title}`} key={category.id} className="card" >
-                    <div className="card-image"></div>
-                    <div className="card-title">
-                      <h3>{category.title}</h3>
-                    </div>
-                  </Link>
-                ))}
+            </div>
+
+            <div className="card-lastEvents">
+              <div className="card">
+                <div className="card-image"></div>
+
+                <div className="card-body">
+                  <div className="card-title">
+                    <h3>Não há eventos cadastrados</h3>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+        </div>
+      </main>
+    );
+  }
+
+  if (error) {
+    return error;
+  }
+
+  return (
+    <main>
+      <div className="main-content">
+        <CategoriesCards />
 
         <div className="lastEvents">
           <div className="lastEventsContent">
@@ -124,9 +135,7 @@ export default function Main() {
                 <button
                   id="nextBtn"
                   onClick={handleNextEvents}
-                  disabled={
-                    currentEventIndex + eventsPerPage >= categories.length
-                  }
+                  disabled={currentEventIndex + eventsPerPage >= events.length}
                 >
                   <Image src={arrowRightIcon} alt="Próximo" />
                 </button>
@@ -135,20 +144,24 @@ export default function Main() {
 
             <div className="card-lastEvents">
               {visibleEvents.map((category) => (
-                <Link href={`/evento/${category.title}`} className="card" key={category.id}>
+                <Link
+                  href={`/eventos/filter?genero=${category.genero}`}
+                  className="card"
+                  key={category.id}
+                >
                   <div className="card-image"></div>
 
                   <div className="card-body">
                     <div className="card-data">
-                      <h3>{category.date}</h3>
+                      <h3>{category.data}</h3>
                     </div>
 
                     <div className="card-title">
-                      <h3>{category.title}</h3>
+                      <h3>{category.genero}</h3>
                     </div>
 
                     <div className="card-location">
-                      <h3>{category.location}</h3>
+                      <h3>{category.local}</h3>
                     </div>
                   </div>
                 </Link>
