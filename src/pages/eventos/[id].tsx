@@ -69,43 +69,47 @@ export default function EventPage() {
               </div>
 
               <div className="content-info">
-                <div className="content-title">
-                  <div className="title">
-                    <h1>{event.titulo}</h1>
+                <div className="content-top">
+                  <div className="content-title">
+                    <div className="title">
+                      <h1>{event.titulo}</h1>
+                    </div>
+
+                    <div className="genre">
+                      <p>
+                        <span>Genero: </span> {event.genero}
+                      </p>
+                    </div>
+
+                    <div className="price">
+                      <p>
+                        <span>Preço:</span> Gratuito
+                      </p>
+                    </div>
+
+                    <div className="btn-subscribe">
+                      <button id="subscribe-button">Comprar ingresso</button>
+                    </div>
                   </div>
 
-                  <div className="genre">
-                    <p><span>Genero: </span> {event.genero}</p>
-                  </div>
+                  <div className="content-details">
+                    <div className="event-data">
+                      <p>
+                        <span>Data:</span> {event.data}
+                      </p>
+                    </div>
 
-                  <div className="price">
-                    <p>
-                      <span>Preço:</span> Gratuito
-                    </p>
-                  </div>
+                    <div className="event-organizer">
+                      <p>
+                        <span>Organizador:</span> {event.genero}
+                      </p>
+                    </div>
 
-                  <div className="btn-subscribe">
-                    <button id="subscribe-button">Comprar ingresso</button>
-                  </div>
-                </div>
-
-                <div className="content-details">
-                  <div className="event-data">
-                    <p>
-                      <span>Data:</span> {event.data}
-                    </p>
-                  </div>
-
-                  <div className="event-organizer">
-                    <p>
-                      <span>Organizador:</span> {event.genero}
-                    </p>
-                  </div>
-
-                  <div className="localization">
-                    <p>
-                      <span>Local:</span> {event.localizacao}
-                    </p>
+                    <div className="localization">
+                      <p>
+                        <span>Local:</span> {event.localizacao}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
