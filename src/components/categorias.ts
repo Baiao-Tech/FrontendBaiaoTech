@@ -39,4 +39,12 @@ export const categorias = [
         id: 10,
         nome: "IA",
     },
+    {
+        id: 11,
+        nome: "Cloud",
+    },
+    {
+        id: 12,
+        nome: "Segurança",
+    },
 ]

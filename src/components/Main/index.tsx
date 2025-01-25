@@ -5,15 +5,15 @@ import Image from "next/image";
 import arrowLeftIcon from "@/assets/arrow-left.svg";
 import arrowRightIcon from "@/assets/arrow-right.svg";
 import Link from "next/link";
-import { api } from "@/services/api";
 import LoadingMain from "@/components/loadingMain";
 import CategoriesCards from "@/components/categoriesCards";
+import { api } from "@/services/api";
 
 interface Event {
   id: number;
-  genero: string;
+  titulo: string;
   data: string;
-  local: string;
+  localizacao: string;
   imagem: string;
 }
 
@@ -34,10 +34,10 @@ export default function Main() {
 
   const getAllEvents = async () => {
     try {
-      const response = await api.get<Event[]>("/eventos");
-      setEvents(response.data);
-      setLoading(false);
+      const response = await api.get("/eventos");
       console.log(response.data);
+      setEvents(response.data.data);
+      setLoading(false);
     } catch (err) {
       setError("Erro ao carregar os eventos." + err);
       setLoading(false);
@@ -145,11 +145,18 @@ export default function Main() {
             <div className="card-lastEvents">
               {visibleEvents.map((category) => (
                 <Link
-                  href={`/eventos/filter?genero=${category.genero}`}
+                  href={`/eventos/${category.id}`}
                   className="card"
                   key={category.id}
                 >
-                  <div className="card-image"></div>
+                  <div className="card-image">
+                    <Image
+                      src={category.imagem || "/placeholder-image.jpg"}
+                      alt={category.titulo}
+                      width={300}
+                      height={300}
+                    />
+                  </div>
 
                   <div className="card-body">
                     <div className="card-data">
@@ -157,11 +164,11 @@ export default function Main() {
                     </div>
 
                     <div className="card-title">
-                      <h3>{category.genero}</h3>
+                      <h3>{category.titulo}</h3>
                     </div>
 
                     <div className="card-location">
-                      <h3>{category.local}</h3>
+                      <h3>{category.localizacao}</h3>
                     </div>
                   </div>
                 </Link>

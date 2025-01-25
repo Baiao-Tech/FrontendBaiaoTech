@@ -1,0 +1,162 @@
+@import "_variables.sass"
+
+main
+    width: 100%
+    background: $black
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    .main-container
+        width: 100%
+        max-width: 1200px
+        height: 100%
+        max-height: 100dvh
+        margin: 20px 0
+        padding: 20px
+        background: $graphite
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+        border-radius: 10px
+
+        .main-content
+            width: 100%
+            display: grid
+            grid-template-columns: 100%
+            grid-template-rows: repeat(auto-fill, minmax(300px, 1fr))
+            grid-gap: 20px
+
+            .content-image
+                width: 100%
+                height: 280px
+                background: $orange
+                border-radius: 10px
+
+                img
+                    width: 100%
+                    height: 100%
+                    object-fit: contain
+                    border-radius: 10px
+                
+            .content-info
+                width: 100%
+                min-height: 280px
+                padding: 20px 0
+                // display: grid
+                // grid-template-columns: 1fr 1fr
+                // grid-template-rows: repeat(auto-fill, minmax(200px, 1fr))
+                // grid-gap: 20px
+                display: flex
+                flex-flow: row wrap
+                justify-content: space-between
+                align-items: flex-start
+                gap: 20px
+
+                .content-title
+                    width: 49%
+                    height: 200px
+                    display: flex
+                    flex-direction: column
+                    justify-content: space-between
+                    align-items: flex-start
+
+                    .title
+                        width: 100%
+                        color: $white
+                        font-size: 20px
+                        font-weight: 700
+
+                    .genre,
+                    .price
+                        width: 100%
+
+                        p
+                            color: $gray
+                            font-weight: 400
+                            font-size: 16px
+
+                            span
+                                color: $orange
+                                font-weight: 700
+
+                    .btn-subscribe
+                        width: 100%
+
+                        button
+                            min-width: 100px
+                            height: 40px
+                            padding: 0 10px
+                            background: $orange
+                            color: $white
+                            font-size: 16px
+                            font-weight: 700
+                            border: none
+                            border-radius: 5px
+                            cursor: pointer
+
+                            &:hover
+                                background: $black
+                                color: $orange
+                                transition: all 0.3s
+
+                .content-details
+                    width: 49%
+                    height: 200px
+                    display: flex
+                    justify-content: flex-start
+                    align-items: flex-end
+                    flex-direction: column
+
+                    .event-data
+                        width: 200px
+
+                        p
+                            color: $gray
+                            font-size: 16px
+                            font-weight: 400
+
+                            span
+                                color: $orange
+                                font-weight: 700
+
+                    .event-organizer
+                        width: 200px
+
+                        p
+                            color: $gray
+                            font-size: 16px
+                            font-weight: 400
+
+                            span
+                                color: $orange
+                                font-weight: 700
+                    
+                    .localization
+                        width: 200px
+
+                        p
+                            color: $gray
+                            font-size: 16px
+                            font-weight: 400
+
+                            span
+                                color: $orange
+                                font-weight: 700
+
+                .content-description
+                    width: 100%
+                    height: 100%
+                    display: flex
+                    justify-content: flex-start
+                    align-items: flex-start
+                    flex-direction: column
+
+                    .description-title
+                        color: $orange
+                        font-size: 16px
+                        font-weight: 400
+
+                    .description-text
+                        p
+                            color: $white
+                            font-weight: 700    
