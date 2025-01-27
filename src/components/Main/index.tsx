@@ -15,10 +15,12 @@ interface Event {
   data: string;
   localizacao: string;
   imagem: string;
+  descricao?: string;
 }
 
 export default function Main() {
   const [events, setEvents] = useState<Event[]>([]);
+  const [eventAwaited, setEventAwaited] = useState<Event | null>(null);
   const [eventsPerPage, setEventsPerPage] = useState(4);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -35,8 +37,13 @@ export default function Main() {
   const getAllEvents = async () => {
     try {
       const response = await api.get("/eventos");
-      console.log(response.data);
-      setEvents(response.data.data);
+      const allEvents: Event[] = response.data.data;
+      setEvents(allEvents);
+
+      // Busca o evento com id 12
+      const awaited = allEvents.find((event) => event.id === 12);
+      setEventAwaited(awaited || null);
+
       setLoading(false);
     } catch (err) {
       setError("Erro ao carregar os eventos." + err);
@@ -83,26 +90,26 @@ export default function Main() {
           <CategoriesCards />
 
           <div className="lastEvents">
-          <div className="lastEventsContent">
-            <div className="lastEventsTitle-btn">
-              <div className="lastEventsTitle">
-                <h2>Próximos Eventos</h2>
+            <div className="lastEventsContent">
+              <div className="lastEventsTitle-btn">
+                <div className="lastEventsTitle">
+                  <h2>Próximos Eventos</h2>
+                </div>
               </div>
-            </div>
 
-            <div className="card-lastEvents">
-              <div className="card">
-                <div className="card-image"></div>
+              <div className="card-lastEvents">
+                <div className="card">
+                  <div className="card-image"></div>
 
-                <div className="card-body">
-                  <div className="card-title">
-                    <h3>Não há eventos cadastrados</h3>
+                  <div className="card-body">
+                    <div className="card-title">
+                      <h3>Não há eventos cadastrados</h3>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </main>
     );
@@ -177,44 +184,50 @@ export default function Main() {
           </div>
         </div>
 
-        <div className="eventAwaited">
-          <div className="eventAwaitedContent">
-            <div className="eventAwaitedTitle">
-              <h2>Evento mais aguardado</h2>
-            </div>
+        {eventAwaited && (
+          <div className="eventAwaited">
+            <div className="eventAwaitedContent">
+              <div className="eventAwaitedTitle">
+                <h2>Evento mais aguardado</h2>
+              </div>
 
-            <div className="card-eventAwaited">
-              <div className="card-image"></div>
-
-              <div className="card-info">
-                <div className="info">
-                  <div className="card-data">
-                    <h3>MAI 16 a MAI 18 - 08:00 as 20:00</h3>
-                  </div>
-
-                  <div className="card-title">
-                    <h3>IA - Inteligência Artificial</h3>
-                  </div>
-
-                  <div className="card-description">
-                    <p>
-                      Introdução, Conteitos, Beneficios e Maleficios da
-                      Inteligência Artificial no cotidiano
-                    </p>
-                  </div>
-
-                  <div className="card-location">
-                    <h3>Centro de Eventos - Fortaleza, CE</h3>
-                  </div>
+              <div className="card-eventAwaited">
+                <div className="card-image">
+                  <Image
+                    src={eventAwaited.imagem || "/placeholder-image.jpg"}
+                    alt={eventAwaited.titulo}
+                    width={300}
+                    height={300}
+                  />
                 </div>
 
-                <div className="card-btn">
-                  <button>Ver Detalhes</button>
+                <div className="card-info">
+                  <div className="info">
+                    <div className="card-data">
+                      <h3>{eventAwaited.data}</h3>
+                    </div>
+
+                    <div className="card-title">
+                      <h3>{eventAwaited.titulo}</h3>
+                    </div>
+
+                    <div className="card-description">
+                      <p>{eventAwaited.descricao}</p>
+                    </div>
+
+                    <div className="card-location">
+                      <h3>{eventAwaited.localizacao}</h3>
+                    </div>
+                  </div>
+
+                  <div className="card-btn">
+                    <button>Ver Detalhes</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </main>
   );
